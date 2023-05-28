@@ -1,0 +1,18 @@
+{
+  "name": "lunadb",
+  "version": "3.1.5",
+  "description": "Simple database",
+  "main": "luna.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Collin Buchkamer",
+  "repository": "https://github.com/Hanyaku-Chan/LunaDB",
+  "license": "AGPL-3",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "fs": "^0.0.1-security",
+    "json-collection": "^1.1.2",
+    "net": "^1.0.2"
+  }
+}
