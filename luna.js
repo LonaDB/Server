@@ -13,9 +13,9 @@ _                       ______  ____  \n\
 \n\
 ")
 
-let port = 2000;
+let config = require("./config");
 
-let luna = new Main(port);
+let luna = new Main(config);
 
 console.log("\
 [Note] LunaDB is still in the beta.\n\

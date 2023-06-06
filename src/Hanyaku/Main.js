@@ -3,10 +3,10 @@ let UserManager = require(__dirname + "/Utils/UserManager");
 let NetworkManager = require(__dirname + "/Utils/NetworkManager");
 
 module.exports = class{
-    constructor(port){
+    constructor(config){
         this.version = "3.1.5";
 
-        this.port = port;
+        this.config = config;
         
         this.tableManager = new TableManager(this);
         this.userManager = new UserManager(this);

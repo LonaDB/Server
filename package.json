@@ -6,11 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Collin Buchkamer",
-  "repository": "https://github.com/Hanyaku-Chan/LunaDB",
-  "license": "AGPL-3",
+  "author": "Collin Buchkamer",  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hanyaku-Chan/LunaDB"
+  },
+  "keywords": [
+    "database",
+    "lunadb",
+    "json",
+    "variable",
+    "variables"
+  ],
+  "license": "AGPL-3.0",
   "dependencies": {
-    "crypto-js": "^4.1.1",
     "fs": "^0.0.1-security",
     "json-collection": "^1.1.2",
     "net": "^1.0.2"

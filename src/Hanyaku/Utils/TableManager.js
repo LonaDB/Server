@@ -20,7 +20,21 @@ module.exports = class{
         return {"success": true};
     }
 
-    getFromTable = function (table, name) { return this.tables[table + ".json"][name]; }
+    getFromTable = function (table, name) { 
+        if(!name || !table) return {"success": false, "err": "arguments_invalid"};
+        if(!this.tables[table + ".json"]) return {"success": false, "err": "table_invalid"};
+        return this.tables[table + ".json"][name]; 
+    }
+
+    removeFromTable = async function (table, name) {
+        if(!name || !table) return {"success": false, "err": "arguments_invalid"};
+        if(!this.tables[table + ".json"]) return {"success": false, "err": "table_invalid"};
+        if(!this.tables[table + ".json"][name]) return {"success": false, "err": "not_exist"};
+        
+        delete this.tables[table + ".json"][name];
+        fs.writeFileSync(__dirname + "/../Data/Tables/" + table + ".json", JSON.stringify(this.tables[table + ".json"]));
+        return {"success": true};
+    }
 
     insertToTable = async function (table, name, content) {
         if(!name || !table || !content) return {"success": false, "err": "arguments_invalid"};
