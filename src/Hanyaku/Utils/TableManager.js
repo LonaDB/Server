@@ -3,8 +3,8 @@ let fs = require("fs");
 let tables = {};
 
 module.exports = class{
-    constructor(luna){
-        this.luna = luna;
+    constructor(lona){
+        this.lona = lona;
         this.tables = tables;
         this._loaded = false;
     }

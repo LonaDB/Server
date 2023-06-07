@@ -1,6 +1,6 @@
-# LunaDB
+# LonaDB
 
-LunaDB is my 3rd attempt in creating my own "database".
+LonaDB is my 3rd attempt in creating my own "database".
 Please keep in mind that this is a early prototype.
 
 - 1st attempt: [ShinoaDB](https://github.com/Hanyaku-Chan/ShinoaDB)
@@ -9,31 +9,31 @@ Please keep in mind that this is a early prototype.
 ## Installation.
 
 ```bash
-git clone https://github.com/Hanyaku-Chan/LunaDB
-cd LunaDB
+git clone https://github.com/Hanyaku-Chan/LonaDB
+cd LonaDB
 
 npm i
 ```
 
 ## Usage
 
-To use LunaDB, you have to use the [LunaDB Client](https://github.com/Hanyaku-Chan/LunaDB-Client) for JavaScript or create your own Client.
+To use LonaDB, you have to use the [LonaDB Client](https://github.com/Hanyaku-Chan/LonaDB-Client) for JavaScript or create your own Client.
 
 ```javascript
-let LunaDB = require("lunadb-client");
-let database1 = new LunaDB("Host", Port, "Login Name", "Login Password");
+let LonaDB = require("lonadb-client");
+let database1 = new LonaDB("Host", Port, "Login Name", "Login Password");
 ```
 
 You can currently do:
-- LunaDB.set(table, name, value)
-- LunaDB.get(table, name)
-- LunaDB.remove(table, name)
-- LunaDB.createTable(name)
+- LonaDB.set(table, name, value)
+- LonaDB.get(table, name)
+- LonaDB.remove(table, name)
+- LonaDB.createTable(name)
 
 
 And you can manage users if you have access to the Administrator user:
-- LunaDB.createUser(name, password)
-- LunaDB.deleteUser(name)
+- LonaDB.createUser(name, password)
+- LonaDB.deleteUser(name)
 
 The users created can be used to access the database. (What else should we use them for? Any suggestions? Open a issue!)
 

@@ -1,8 +1,8 @@
 let Collection = require("json-collection");
 
 module.exports = class{
-    constructor(luna){
-        this.luna = luna;
+    constructor(lona){
+        this.lona = lona;
         this.users = new Collection();
         this._loaded = false;
     }
@@ -39,7 +39,7 @@ module.exports = class{
         if(!name || !password) return {"success": false, "err": "arguments_invalid"};
 
         if(name === "Administrator" || name === "administrator" || name === "admin" || name === "Admin") {
-            if(password !== this.luna.config.admin_password) return {"success": false, "err": "wrong_password"};
+            if(password !== this.lona.config.admin_password) return {"success": false, "err": "wrong_password"};
             return {"success": true};
         }
         

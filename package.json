@@ -1,8 +1,8 @@
 {
-  "name": "lunadb",
+  "name": "lonadb",
   "version": "3.1.5",
   "description": "Simple database",
-  "main": "luna.js",
+  "main": "lona.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,7 @@
   },
   "keywords": [
     "database",
-    "lunadb",
+    "lonadb",
     "json",
     "variable",
     "variables"
