@@ -9,15 +9,15 @@ Please keep in mind that this is a early prototype.
 ## Installation.
 
 ```bash
-git clone https://github.com/Hanyaku-Chan/LonaDB
-cd LonaDB
+git clone https://github.com/LonaDB/Server
+cd Server
 
 npm i
 ```
 
 ## Usage
 
-To use LonaDB, you have to use the [LonaDB Client](https://github.com/Hanyaku-Chan/LonaDB-Client) for JavaScript or create your own Client.
+To use LonaDB, you have to use the [LonaDB Client](https://github.com/LonaDB/JavaScript-Client) for JavaScript or create your own Client.
 
 ```javascript
 let LonaDB = require("lonadb-client");
