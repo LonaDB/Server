@@ -52,13 +52,21 @@ module.exports = class{
                         break;
                     
                     case "create_table":
+                        if(!this.lona.userManager.checkPermission(data.login.name, "table_create")) return socket.write(BSON.serialize( {"success": false, "err": "no_permission", "process": data.process} ));
                         if(!data.table.name) return socket.write(BSON.serialize( {"success": false, "err": "bad_table_name", "process": data.process} ));
                         this.lona.tableManager.createTable(data.table.name);
                         socket.write(BSON.serialize( {"success": true, "process": data.process} ));
                         break;
+
+                    case "delete_table":
+                        if(!this.lona.userManager.checkPermission(data.login.name, "table_delete")) return socket.write(BSON.serialize( {"success": false, "err": "no_permission", "process": data.process} ));
+                        if(!data.table.name) return socket.write(BSON.serialize( {"success": false, "err": "bad_table_name", "process": data.process} ));
+                        this.lona.tableManager.deleteTable(data.table.name);
+                        socket.write(BSON.serialize( {"success": true, "process": data.process} ));
+                        break;
                     
                     case "create_user":
-                        if(data.login.name !== "Administrator") return socket.write(BSON.serialize( {"success": false, "err": "user_not_admin", "process": data.process} ));
+                        if(!this.lona.userManager.checkPermission(data.login.name, "user_create")) return socket.write(BSON.serialize( {"success": false, "err": "no_permission", "process": data.process} ));
                         if(!data.user.name || !data.user.password) return socket.write(BSON.serialize( {"success": false, "err": "missing_new_user_data", "process": data.process} ));
 
                         let createdUser = this.lona.userManager.createUser(data.user.name, data.user.password);
@@ -66,11 +74,27 @@ module.exports = class{
                         break;
 
                     case "delete_user":
-                        if(data.login.name !== "Administrator") return socket.write(BSON.serialize( {"success": false, "err": "user_not_admin", "process": data.process} ));
+                        if(!this.lona.userManager.checkPermission(data.login.name, "user_delete")) return socket.write(BSON.serialize( {"success": false, "err": "no_permission", "process": data.process} ));
                         if(!data.user.name) return socket.write(BSON.serialize( {"success": false, "err": "missing_user_name", "process": data.process} ));
 
                         let deletedUser = this.lona.userManager.deleteUser(data.user.name);
                         socket.write(BSON.serialize(deletedUser));
+                        break;
+                        
+                    case "add_permission":
+                        if(!this.lona.userManager.checkPermission(data.login.name, "permission_add")) return socket.write(BSON.serialize( {"success": false, "err": "no_permission", "process": data.process} ));
+                        if(!data.user.name) return socket.write(BSON.serialize( {"success": false, "err": "missing_user_name", "process": data.process} ));
+
+                        this.lona.userManager.addPermission(data.user.name, data.permission.name);
+                        socket.write(BSON.serialize({"success": true}));
+                        break;
+
+                    case "remove_permission":
+                        if(!this.lona.userManager.checkPermission(data.login.name, "permission_remove")) return socket.write(BSON.serialize( {"success": false, "err": "no_permission", "process": data.process} ));
+                        if(!data.user.name) return socket.write(BSON.serialize( {"success": false, "err": "missing_user_name", "process": data.process} ));
+
+                        this.lona.userManager.removePermission(data.user.name, data.permission.name);
+                        socket.write(BSON.serialize({"success": true}));
                         break;
                 }
             });

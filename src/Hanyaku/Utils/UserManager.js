@@ -22,7 +22,17 @@ module.exports = class{
         if(!name || !password) return {"success": false, "err": "arguments_invalid"};
         if(this.users[name]) return {"success": false, "err": "user_exists"};
 
-        this.users[name] = password;
+        this.users[name] = {
+            "password": password,
+            "permissions": {
+                "user_create": false,
+                "user_delete": false,
+                "table_create": false,
+                "table_delete": false,
+                "permission_add": false,
+                "permission_remove": false
+            }
+        };
         fs.writeFileSync(__dirname + "/../Data/Users.bson", BSON.serialize(this.users));
         return {"success": true};
     }
@@ -32,21 +42,54 @@ module.exports = class{
         if(!this.users[name]) return {"success": false, "err": "user_missing"};
 
         delete this.users[name];
-        this.users.save(__dirname + "/../Data/Users.bson");
+        fs.writeFileSync(__dirname + "/../Data/Users.bson", BSON.serialize(this.users));
         return {"success": true};
     }
 
     checkPassword = async function (name, password) {
         if(!name || !password) return {"success": false, "err": "arguments_invalid"};
 
-        if(name === "Administrator" || name === "administrator" || name === "admin" || name === "Admin") {
+        if(name === "Administrator") {
             if(password !== this.lona.config.admin_password) return {"success": false, "err": "wrong_password"};
             return {"success": true};
         }
         
         if(!this.users[name]) return {"success": false, "err": "user_doesnt_exist"};
 
-        if(this.users[name] !== password) return {"success": false, "err": "wrong_password"};
+        if(this.users[name].password !== password) return {"success": false, "err": "wrong_password"};
+
+        return {"success": true};
+    }
+
+    checkPermission = function (name, permission) {
+        if(!name || !permission) return {"success": false, "err": "arguments_invalid"};
+
+        if(!this.users[name]) return {"success": false, "err": "user_doesnt_exist"};
+
+        return this.users[name].permissions[permission]
+    }
+
+    addPermission = async function (name, permission) {
+        if(!name || !permission) return {"success": false, "err": "arguments_invalid"};
+
+        if(!this.users[name]) return {"success": false, "err": "user_doesnt_exist"};
+
+        console.log(this.users)
+        this.users[name].permissions[permission] = true;
+        fs.writeFileSync(__dirname + "/../Data/Users.bson", BSON.serialize(this.users));
+
+        return {"success": true};
+    }
+
+    removePermission = async function (name, permission) {
+        if(!name || !permission) return {"success": false, "err": "arguments_invalid"};
+
+        if(!this.users[name]) return {"success": false, "err": "user_doesnt_exist"};
+
+        if(!this.users[name].permissions[permission]) return {"success": true, "err": "missing_permission"};
+
+        delete this.users[name].permissions[permission];
+        fs.writeFileSync(__dirname + "/../Data/Users.bson", BSON.serialize(this.users));
 
         return {"success": true};
     }

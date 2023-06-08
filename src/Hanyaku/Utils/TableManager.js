@@ -55,4 +55,13 @@ module.exports = class{
         fs.writeFileSync(__dirname + "/../Data/Tables/" + name + ".bson", "{}");
         return {"success": true};
     }
+
+    deleteTable = async function (name) {
+        if(!name) return {"success": false, "err": "name_invalid"};
+        if(!this.tables[name + ".bson"]) return {"success": false, "err": "not_exists"};
+
+        delete this.tables[name + ".bson"];
+        fs.unlink(__dirname + "/../Data/Tables/" + name + ".bson", (err) => {if (err) throw err;}); ;
+        return {"success": true};
+    }
 }
