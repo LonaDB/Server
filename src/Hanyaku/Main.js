@@ -1,3 +1,5 @@
+let fs = require("fs");
+
 let TableManager = require(__dirname + "/Utils/TableManager");
 let UserManager = require(__dirname + "/Utils/UserManager");
 let NetworkManager = require(__dirname + "/Utils/NetworkManager");
