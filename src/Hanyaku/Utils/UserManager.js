@@ -66,6 +66,8 @@ module.exports = class{
 
         if(!this.users[name]) return {"success": false, "err": "user_doesnt_exist"};
 
+        if(!this.users[name].permissions[permission]) return false;
+
         return this.users[name].permissions[permission]
     }
 

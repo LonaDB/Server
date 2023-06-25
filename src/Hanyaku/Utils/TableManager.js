@@ -12,6 +12,7 @@ module.exports = class{
 
     loadTables = async () => {
         if(this._loaded === true) return {"success": false, "err": "alredy_loaded"};
+        if (fs.readdirSync(__dirname + '/../Data/Tables/').length === 0) await fs.writeFileSync(__dirname + "/../Data/Tables/Default.bson", BSON.serialize({}));
         fs.readdirSync(__dirname + "/../Data/Tables/").forEach(function(file) {
             tables[file] = BSON.deserialize(fs.readFileSync(__dirname + "/../Data/Tables/" + file));
             console.log("[Table] Loaded Table from file '" + file + "'");
