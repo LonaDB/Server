@@ -68,11 +68,8 @@ async function start() {
     let config = JSON.parse(fs.readFileSync("./config.json", "utf-8"));
     let luna = new Main(config);
     console.log("\
-[Note] LonaDB is still in the beta.\n\
-[Note] Older beta versions can be found on https://github.com/Hanyaku/\n\
-[Note] V1: ShinoaDB\n\
-[Note] V2: AnbuDB\n\
-[Note] V3: LonaDB <3\
+[Note] Hadro is still in the beta.\n\
+[Note] Hadro is LonaDB's server written in JavaScript\n\
     ");
     
     luna.start();

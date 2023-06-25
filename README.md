@@ -4,7 +4,7 @@ LonaDB is a simple database written in Node.js JavaScript that utilizes JSON fil
 
 ## Prerequisites
 
-To run the LonaDB server, make sure you have the following software installed:
+To run the Hadro server, make sure you have the following software installed:
 
 - Node.js (version 12 or above)
 - npm (Node Package Manager)
@@ -16,7 +16,7 @@ To install the LonaDB server, follow these steps:
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/LonaDB/Server.git
+git clone https://github.com/LonaDB/Hadro
 ```
 
 2. Navigate to the project directory:
@@ -36,7 +36,7 @@ npm install
 To start the LonaDB server, run the following command:
 
 ```bash
-node lona.js
+node hadro.js
 ```
 
 If you don't have a config file already, the setup script will run you through defining your port and creating your initial user, who has ALL permissions.

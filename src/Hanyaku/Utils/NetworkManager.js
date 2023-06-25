@@ -70,7 +70,7 @@ module.exports = class{
                         if(!data.user.name || !data.user.password) return socket.write(BSON.serialize( {"success": false, "err": "missing_new_user_data", "process": data.process} ));
 
                         let createdUser = this.lona.userManager.createUser(data.user.name, data.user.password);
-                        socket.write(BSON.serialize(createdUser));
+                        socket.write(BSON.serialize( {"success": true, "process": data.process} ));
                         break;
 
                     case "delete_user":
@@ -80,13 +80,25 @@ module.exports = class{
                         let deletedUser = this.lona.userManager.deleteUser(data.user.name);
                         socket.write(BSON.serialize(deletedUser));
                         break;
+
+                    case "check_password":
+                        if(!data.checkPass.name || !data.checkPass.pass) return socket.write(BSON.serialize( {"success": false, "err": "missing_arguments"} ));
+                        let checkPass = this.lona.userManager.checkPassword(data.checkPass.name, data.checkPass.pass);
+
+                        socket.write(BSON.serialize( {"success": true, "passCheck": checkPass, "process": data.process} ));
+                        break;
+
+                    case "get_tables":
+                        let tables = this.lona.tableManager.getTables();
+                        socket.write(BSON.serialize( {"success": true, "tables": tables, "process": data.process} ));
+                        break;
                         
                     case "add_permission":
                         if(!this.lona.userManager.checkPermission(data.login.name, "permission_add")) return socket.write(BSON.serialize( {"success": false, "err": "no_permission", "process": data.process} ));
                         if(!data.user.name) return socket.write(BSON.serialize( {"success": false, "err": "missing_user_name", "process": data.process} ));
 
                         this.lona.userManager.addPermission(data.user.name, data.permission.name);
-                        socket.write(BSON.serialize({"success": true}));
+                        socket.write(BSON.serialize({"success": true, "process": data.process}));
                         break;
 
                     case "remove_permission":
@@ -94,7 +106,7 @@ module.exports = class{
                         if(!data.user.name) return socket.write(BSON.serialize( {"success": false, "err": "missing_user_name", "process": data.process} ));
 
                         this.lona.userManager.removePermission(data.user.name, data.permission.name);
-                        socket.write(BSON.serialize({"success": true}));
+                        socket.write(BSON.serialize({"success": true, "process": data.process}));
                         break;
                 }
             });
