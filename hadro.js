@@ -1,4 +1,4 @@
-let Main = require("./src/Hanyaku/Main");
+let Main = require("./src/Lona/Main");
 
 let fs = require("fs");
 const readline = require('readline');
@@ -19,11 +19,11 @@ function askQuestion(query) {
 }
 
 async function checkDirs(){
-    if (!fs.existsSync("./src/Hanyaku/Data")){
-        fs.mkdirSync("./src/Hanyaku/Data");
+    if (!fs.existsSync("./src/Lona/Data")){
+        fs.mkdirSync("./src/Lona/Data");
     }
-    if (!fs.existsSync("./src/Hanyaku/Data/Tables")){
-        fs.mkdirSync("./src/Hanyaku/Data/Tables");
+    if (!fs.existsSync("./src/Lona/Data/Tables")){
+        fs.mkdirSync("./src/Lona/Data/Tables");
     }
 }
 
@@ -36,7 +36,7 @@ async function checkConfig(){
 }
 
 async function checkUsers(){
-    if (fs.existsSync("./src/Hanyaku/Data/Users.bson")) return;
+    if (fs.existsSync("./src/Lona/Data/Users.bson")) return;
     else {
         let username = await askQuestion("What should be your initial username? \n");
         let password = await askQuestion("What should be your initial user password? \n");
@@ -55,7 +55,7 @@ async function checkUsers(){
         };
 
 
-        fs.writeFileSync("./src/Hanyaku/Data/Users.bson", BSON.serialize(usersJson));
+        fs.writeFileSync("./src/Lona/Data/Users.bson", BSON.serialize(usersJson));
     }
 }
 
