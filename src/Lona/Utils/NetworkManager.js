@@ -93,6 +93,13 @@ module.exports = class{
                         socket.write(BSON.serialize( {"success": true, "tables": tables, "process": data.process} ));
                         break;
 
+                    case "get_table_data":
+                        if(!this.lona.tableManager.tables[data.table]) return socket.write(BSON.serialize( {"success": false, "err": "not_exist", "not_exists": true, "process": data.process} ));
+                        let table = this.lona.tableManager.tables[data.table];
+
+                        socket.write(BSON.serialize( {"success": true, "data": table, "not_exists": false, "process": data.process} ));
+                        break;
+
                     case "check_permission":
                         if(!data.permission || !data.permission.name || !data.permission.user) return socket.write(BSON.serialize( {"success": false, "err": "missing_arguments"} ));
 
